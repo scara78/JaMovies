@@ -17,8 +17,8 @@ async function getStreamsFlixquest(url) {
     const response = await axios.get(url);
     const { sources } = response.data;
     return sources.map((source) => ({
-      url: source.url,
-      title: `🎞️ VidSrcTo - ${source.quality}`,
+      url: source,
+      title: `🎞️ Cscara - 2Embed`,
     }));
   } catch (error) {
     throw new Error("Video not found");
@@ -92,7 +92,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
   }
 
   try {
-    if (url.includes("flixquest")) {
+    if (url.includes("filme")) {
       return { streams: await getStreamsFlixquest(url) };
     }
   } catch (error) {
