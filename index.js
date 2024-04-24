@@ -34,8 +34,8 @@ async function getStreamsVsrcme(url) {
     for (const item of data) {
       if (
         !item.data ||
-        !item.data.file ||
-        !item.data.file.startsWith("https://")
+        !item.data.stream ||
+        !item.data.stream.startsWith("https://")
       ) {
         continue;
       }
@@ -84,7 +84,7 @@ const builder = new addonBuilder({
 builder.defineStreamHandler(async ({ type, id }) => {
   let url;
   if (type === "movie") {
-    url = `https://flixquest-api.vercel.app/vidsrcto/watch-movie?tmdbId=${id}`;
+    url = `https://www.filme.detanet.ro/p.php?id=${id}`;
   } else if (type === "series") {
     const [imdbId, season, episode] = id.split(":");
     const tmdbId = await getTmdbIdFromImdbId(imdbId);
@@ -92,12 +92,12 @@ builder.defineStreamHandler(async ({ type, id }) => {
   }
 
   try {
-    if (url.includes("flixquest")) {
+    if (url.includes("filme.")) {
       return { streams: await getStreamsFlixquest(url) };
     }
   } catch (error) {
     if (type === "movie") {
-      url = `https://vidsrc-api-bice.vercel.app/${id}`;
+      url = `https://www.filme.detanet.ro/p.php?id=${id}`;
     } else if (type === "series") {
       const [imdbId, season, episode] = id.split(":");
       url = `https://vidsrc-api-bice.vercel.app/${imdbId}?s=${season}&e=${episode}`;
@@ -107,7 +107,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
       return { streams: await getStreamsNewLink(url) };
     } catch (error) {
       if (type === "movie") {
-        url = `https://srcvid.vercel.app/vsrcme/${id}`;
+        url = `https://srcvid.vercel.app/vidsrc/${id}`;
       } else if (type === "series") {
         const [imdbId, season, episode] = id.split(":");
         const tmdbId = await getTmdbIdFromImdbId(imdbId);
