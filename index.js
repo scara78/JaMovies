@@ -84,7 +84,7 @@ const builder = new addonBuilder({
 builder.defineStreamHandler(async ({ type, id }) => {
   let url;
   if (type === "movie") {
-    url = `https://www.filme.detanet.ro/p.php?id=${imdbId}`;
+    url = `https://flixquest-api.vercel.app/vidsrcto/watch-movie?tmdbId=${id}`;
   } else if (type === "series") {
     const [imdbId, season, episode] = id.split(":");
     const tmdbId = await getTmdbIdFromImdbId(imdbId);
