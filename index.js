@@ -17,13 +17,14 @@ async function getStreamsFlixquest(url) {
     const response = await axios.get(url);
     const { sources } = response.data;
     return sources.map((source) => ({
-      url: 0.source,
-      title: `🎞️ Cscara -2Embed`,
+      url: source.url,
+      title: `🎞️ VidSrcTo - ${source.quality}`,
     }));
   } catch (error) {
     throw new Error("Video not found");
   }
 }
+
 async function getStreamsVsrcme(url) {
   try {
     const response = await axios.get(url);
@@ -71,9 +72,9 @@ async function getStreamsNewLink(url) {
 }
 
 const builder = new addonBuilder({
-  id: "org.Scaramovies",
-  version: "1.2.2",
-  name: "Scaramovies",
+  id: "org.jamovies",
+  version: "1.2.1",
+  name: "JaMovies",
   logo: "https://i.imgur.com/QhZlCx6.jpg",
   resources: ["stream"],
   types: ["movie", "series"],
@@ -83,7 +84,7 @@ const builder = new addonBuilder({
 builder.defineStreamHandler(async ({ type, id }) => {
   let url;
   if (type === "movie") {
-    url = `https://www.filme.detanet.ro/p.php?id=${imdbId}`;
+    url = `https://flixquest-api.vercel.app/vidsrcto/watch-movie?tmdbId=${id}`;
   } else if (type === "series") {
     const [imdbId, season, episode] = id.split(":");
     const tmdbId = await getTmdbIdFromImdbId(imdbId);
@@ -91,7 +92,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
   }
 
   try {
-    if (url.includes("filme.")) {
+    if (url.includes("flixquest")) {
       return { streams: await getStreamsFlixquest(url) };
     }
   } catch (error) {
