@@ -72,9 +72,9 @@ async function getStreamsNewLink(url) {
 }
 
 const builder = new addonBuilder({
-  id: "org.jamovies",
-  version: "1.2.1",
-  name: "JaMovies",
+  id: "org.ScaraMovies",
+  version: "1.2.2",
+  name: "ScaraMovies",
   logo: "https://i.imgur.com/QhZlCx6.jpg",
   resources: ["stream"],
   types: ["movie", "series"],
@@ -84,7 +84,7 @@ const builder = new addonBuilder({
 builder.defineStreamHandler(async ({ type, id }) => {
   let url;
   if (type === "movie") {
-    url = `https://flixquest-api.vercel.app/vidsrcto/watch-movie?tmdbId=${id}`;
+    url = `https://www.filme.detanet.ro/p.php?id=${imdbId}`;
   } else if (type === "series") {
     const [imdbId, season, episode] = id.split(":");
     const tmdbId = await getTmdbIdFromImdbId(imdbId);
