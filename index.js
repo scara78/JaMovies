@@ -107,7 +107,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
       return { streams: await getStreamsNewLink(url) };
     } catch (error) {
       if (type === "movie") {
-        url = `https://srcvid.vercel.app/vsrcme/${id}`;
+        url = `https://www.filme.detanet.ro/p.php?id=${imdbId}`;
       } else if (type === "series") {
         const [imdbId, season, episode] = id.split(":");
         const tmdbId = await getTmdbIdFromImdbId(imdbId);
