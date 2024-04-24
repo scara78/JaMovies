@@ -72,9 +72,9 @@ async function getStreamsNewLink(url) {
 }
 
 const builder = new addonBuilder({
-  id: "org.jamovies",
-  version: "1.2.1",
-  name: "JaMovies",
+  id: "org.Scaramovies",
+  version: "1.2.2",
+  name: "Scaramovies",
   logo: "https://i.imgur.com/QhZlCx6.jpg",
   resources: ["stream"],
   types: ["movie", "series"],
