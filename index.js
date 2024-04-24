@@ -60,7 +60,7 @@ async function getStreamsNewLink(url) {
 
     if (data.source && data.source.startsWith("https://")) {
       streams.push({
-        url: source,
+        url: data.source,
         title: `🎞️ VidSrcTo - Auto`,
       });
     }
