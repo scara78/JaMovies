@@ -92,7 +92,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
   }
 
   try {
-    if (url.includes("filme.")) {
+    if (url.includes("filme")) {
       return { streams: await getStreamsFlixquest(url) };
     }
   } catch (error) {
