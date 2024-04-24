@@ -24,7 +24,7 @@ async function getStreamsFlixquest(url) {
         title: `🎞️ VidSrcTo - Auto`,
       });
     }
-
+}
 async function getStreamsVsrcme(url) {
   try {
     const response = await axios.get(url);
