@@ -14,21 +14,16 @@ async function getTmdbIdFromImdbId(imdbId) {
 
 async function getStreamsFlixquest(url) {
   try {
-    const response = await axios.get(url);
-    const { sources } = response.data;
-    return sources.map((source) => ({
-      url: source,
-      title: `🎞️ Cscara - 2embed`,
-    }));
-  } catch (error) {
-    throw new Error("Video not found");
-  }
-}
-    return streams;
-  } catch (error) {
-    throw new Error("Video not found");
-  }
-}
+   const response = await axios.get(url);
+    const data = response.data;
+    let streams = [];
+
+    if (data.source && data.source.startsWith("https://")) {
+      streams.push({
+        url: data.source,
+        title: `🎞️ VidSrcTo - Auto`,
+      });
+    }
 
 async function getStreamsVsrcme(url) {
   try {
@@ -97,7 +92,7 @@ builder.defineStreamHandler(async ({ type, id }) => {
   }
 
   try {
-    if (url.includes("filme")) {
+    if (url.includes("filme.")) {
       return { streams: await getStreamsFlixquest(url) };
     }
   } catch (error) {
